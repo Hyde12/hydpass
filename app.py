@@ -12,7 +12,7 @@ from cryptography.fernet import Fernet
 from helpers import login_required
 
 app = Flask("__name__")
-db = SQL("sqlite:///C:/Users/Hyde/Documents/Code/HydPass/accounts.db")
+db = SQL("sqlite:///accounts.db")
 
 # MAIL CONFIGURATIONS
 app.config['MAIL_DEFAULT_SENDER'] = 'bot.hydpass@gmail.com'
