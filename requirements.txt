@@ -1,6 +1,7 @@
 Flask
 Flask-Session
 Flask-Mail
-Flask-Login
 cs50
-validate_mail
+validate_email
+Werkzeug
+cryptography
