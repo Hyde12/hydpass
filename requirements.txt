@@ -2,6 +2,5 @@ Flask
 Flask-Session
 Flask-Mail
 Flask-Login
-random
 cs50
 validate_mail
