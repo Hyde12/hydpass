@@ -1,0 +1,48 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+    {% if warning %}
+        <div class="alert alert-warning mt-5">
+            {{ warningText }}
+        </div>
+
+        <h1 class="mt-2">Add Account</h1>
+    {% else %}
+        <h1 class="mt-5">Add Account</h1>
+    {% endif %}
+
+
+    <form action="/add-account" method="post">
+        <div class="mb-1 mt-5 form-outline">
+            <label for="website" class="form-label">Website</label>
+            <input type="text" name="website" id="website" class="form-control" required>
+            <small class="form-text text-muted">Required.</small>
+        </div>
+        <div class="mb-1 mt-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="username" class="form-control">
+            <small class="form-text text-muted">Optional.</small>
+        </div>
+        <div class="mb-1 mt-5">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control">
+            <small class="form-text text-muted">Optional.</small>
+        </div>
+        <div class="mb-1 mt-5">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+                <input type="password" name="password" id="password" class="form-control" required>
+                <button class="btn btn-secondary border border-danger" type="button" id="visible"><span class="fa fa-eye"></span></button>
+                <button class="btn btn-secondary border border-danger" type="button" id="generate">Generate</button>
+            </div>
+
+            <small class="form-text text-muted">Required.</small>
+        </div>
+
+        <button class="button-set mt-5">Add Account</button>
+    </form>
+
+    <script src="static/add_account.js"></script>
+{% endblock %}
+

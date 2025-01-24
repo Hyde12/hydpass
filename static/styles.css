@@ -1,0 +1,80 @@
+/*
+Color Palette: https://colorkit.co/palette/5f27cd-f97794-8f3985-12cbc4-3be8b0-003366-194a8d/
+*/
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-family: 'Secular One', sans-serif;
+
+    background-color: #003366;
+    /* background: url("https://tse4.mm.bing.net/th?id=OIP.NmWCTVvzPRO5RCihT5njxgHaE4&pid=Api&P=0"); */
+    color: #3be8b0;
+}
+
+.button-set {
+    padding: 30px 150px;
+    margin: -50px 15px;
+
+    background-color: #194a8d;
+    /* background: url("https://s.yimg.com/fz/api/res/1.2/s8qBDBFNKnSgUdea5ZKZNQ--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpbGw7aD0yMjA7cT04MDt3PTE0OA--/https://s.yimg.com/zb/imgv1/11c3690f-f435-3649-be33-f681ceb5ee25/t_500x300"); */
+    background-size: contain;
+    color: inherit;
+
+    border: 1px solid #3be8b0;
+    border-radius: 5px;
+
+    transition: all 0.25s;
+}
+
+.button-set:hover {
+    background-color: #2364bd;
+}
+
+.left {
+    float: left !important;
+}
+
+.nav-item {
+    border-bottom: 2px solid rgba(255, 255, 255, 0);
+    transition: all 0.1s
+}
+
+.nav-item:hover {
+    border-bottom: 2px solid white;
+}
+
+.dropdown-item:hover {
+    background-color: #003366;
+}
+
+#home-redirect {
+    font-size: 100px;
+    padding: 150px;
+    padding-bottom: 50px;
+}
+
+#home-text {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: white;
+}
+
+.width-100 {
+    width: 100%
+}
+
+#pass-length {
+    font-size: 500%;
+    background-color: #003366;
+    border: 3px solid #194a8d;
+    width: 200px;
+    height: 200px;
+    color: #0ea29d;
+    text-align: center;
+}

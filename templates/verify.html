@@ -1,0 +1,28 @@
+{% extends "template.html" %}
+
+{% block body %}
+    {% if not success2 %}
+        <div class="alert alert-warning mt-5" role="alert">
+            OTP does not match!
+        </div>
+    {% endif %}
+
+    {% if not success %}
+        <form action="/verify" method="post">
+            <div class="mb-1 mt-5">
+                <label for="otp" class="form-label">OTP</label>
+                <input type="text" name="otp" id="otp" class="form-control" max="6" min="6" autoselect>
+            </div>
+
+            <button class="button-set mt-5">Verify</button>
+        </form>
+        <a href="/" class="link-secondary mt-5">Back to Homepage</a>
+    {% else %}
+        <div class="alert alert-success mt-5" role="alert">
+            Successfully verified!
+        </div>
+        <form action="/">
+            <input class="button-set mt-5" type="submit" value="Back to Homepage">
+        </form>
+    {% endif %}
+{% endblock %}

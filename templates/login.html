@@ -1,0 +1,52 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+    {% if success %}
+        <div class="alert alert-success mt-5" role="alert">
+            Email verification sent!
+        </div>
+    {% endif %}
+
+
+    {% if warning %}
+        <div class="alert alert-warning mt-5" role="alert">
+            {{ warningText }}
+        </div>
+    {% endif %}
+
+
+    {% if warning or success %}
+        <div class="mt-2">
+            <h1>Sign In</h1>
+        </div>
+    {% else %}
+        <div class="mt-5">
+            <h1>Sign In</h1>
+        </div>
+    {% endif %}
+
+    {% if not success %}
+        <form action="/login" method="post">
+            <div class="mb-1 mt-5">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" >
+            </div>
+            <div class="mb-1 mt-5">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control" >
+
+            <button class="button-set mt-5">Login</button>
+        </form>
+    {% else %}
+        <form action="/verify" method="post">
+            <div class="mb-1 mt-3">
+                <label for="otp" class="form-label">OTP</label>
+                <input type="text" name="otp" id="otp" class="form-control" max="6" min="6">
+            </div>
+
+            <button class="button-set mt-5">Verify</button>
+        </form>
+        <a href="/" class="link-secondary mt-5">Back to Homepage</a>
+    {% endif %}
+{% endblock %}

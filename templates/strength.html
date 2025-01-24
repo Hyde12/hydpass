@@ -1,0 +1,65 @@
+{% extends "template.html" %}
+
+{% block body %}
+    <h1 class="mt-5" style="font-size: 75px">Password Strength Test</h1>
+    <p class="mt-0">Tests your passwords strenght</p>
+    <form action="/strength" method="post" class="mt-3 text-danger" id="form">
+        <div>
+            <div class="input-group mt-2 w-100 p-5">
+                <input type="password" class="form-control" id="password" name="password" style="text-align: left;">
+                <button onclick="showPass()" class="btn btn-secondary" type="button" id="show"><span class="fa fa-eye"></span></button>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            {% if uppercase %}
+                <div class="col-md-3">
+                    <p class="text-info">Uppercase</p>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <p class="text-danger">Uppercase</p>
+                </div>
+            {% endif %}
+
+            {% if lowercase %}
+                <div class="col-md-3">
+                    <p class="text-info">Lowercase</p>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <p class="text-danger">Lowercase</p>
+                </div>
+            {% endif %}
+
+            {% if numbers %}
+                <div class="col-md-3">
+                    <p class="text-info">Numbers</p>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <p class="text-danger">Numbers</p>
+                </div>
+            {% endif %}
+
+            {% if symbols %}
+                <div class="col-md-3">
+                    <p class="text-info">Symbols</p>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <p class="text-danger">Symbols</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <input type="submit" value="Test" class="mt-5 mb-5 button-set">
+    </form>
+    {% if success %}
+        <h5>Score: {{ boe }}</h5>
+        <p>{{ passwordFeedback1 }}</p>
+        <p class="mt-3 text-warning">{{ passwordFeedback2 }}</p>
+    {% endif %}
+    <script src="static/strength.js"></script>
+{% endblock %}
+

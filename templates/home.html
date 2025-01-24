@@ -1,0 +1,55 @@
+{% extends "template.html" %}
+
+{% block body %}
+    <div>
+        <h1 id="home-redirect"><span style="color: white;">Your passwords just got better with</span> HydPass</h1>
+
+        <div>
+          {% if session["loggedUser"] %}
+            <form action="/manager" class="d-inline">
+              <input type="submit" class="button-set" value="Password Manager">
+            </form>
+            <form action="/strength" class="d-inline">
+              <input type="submit" class="button-set" value="Password Tester">
+            </form>
+            <form action="/generation" class="d-inline">
+              <input type="submit" class="button-set" value="Password Generator">
+            </form>
+          {% else %}
+              <form action="/register">
+                  <input type="submit" value="Sign up" class="button-set">
+              </form>
+          {% endif %}
+        </div>
+
+        <p id="home-text">The only password service you'll ever need.</p>
+    </div>
+    <div class="bg-secondary">
+        <h1 class="mt-5" id="what-is-hydpass">What is HydPass?</h1>
+        <p class="text-white w-50 mx-auto">HydPass is a password management service that helps you keep your online accounts secure and organized. With HydPass, you can store all of your passwords in one secure location, generate strong, unique passwords for each of your accounts, and test the strength of your existing passwords to ensure they're not at risk of being compromised. Our service is completely free to use, making it an affordable and convenient solution for anyone looking to improve their online security. Plus, with our easy-to-use interface and intuitive design, managing your passwords has never been easier. So if you want to simplify your online life and keep your accounts safe, give HydPass a try today. <br /><a class="link-danger" target="_blank" href="https://github.com/Hyde12">Github</a></p>
+
+        <h1 class="mt-5 p-5">Features</h1>
+        <div class="row" style="margin: 0px; padding: 0px">
+          <div class="col-md-3 mb-4 mx-auto">
+            <div class="border border-primary p-5">
+              <h5 class="text-danger">Password Generator</h5>
+              <p class="text-white">The Password Generator is a tool that creates a unique, strong password for you to use to protect your accounts. It uses a combination of letters, numbers, and special characters to create a password that is difficult for others to crack. This can help to ensure the security of your accounts and prevent unauthorized access.</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4 mx-auto">
+            <div class="border border-primary p-5">
+              <h5 class="text-danger">Password Strength Tester</h5>
+              <p class="text-white">The Password Strength Tester is a tool that analyzes a password and gives you a score indicating how strong it is. It uses an algorithm to check the password against known patterns and dictionary words, and the higher the score, the stronger the password is considered to be.</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4 mx-auto">
+            <div class="border border-primary p-5">
+              <h5 class="text-danger">Password Manager</h5>
+              <p class="text-white">The Password Manager is a tool that securely stores all of your passwords in one place, allowing you to easily access them when needed. It uses strong encryption to protect your passwords and make it able to search up the password you need with ease. This makes it easier to manage and keep your passwords secure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

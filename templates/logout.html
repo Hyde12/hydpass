@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+    <div class="alert alert-warning mt-5" role="alert">
+        Are you sure you want to logout?
+    </div>
+
+    <form action="/logout" method="post">
+        <button class="button-set mt-5">Yes</button>
+    </form>
+    <form action="/">
+        <button class="button-set mt-5">No</button>
+    </form>
+
+{% endblock %}

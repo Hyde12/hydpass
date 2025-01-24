@@ -1,0 +1,141 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+    <h1 class="mt-5" id="title">Password Manager</h1>
+    <form action="/add-account" class="my-2 float-right">
+        <input type="submit" class="btn btn-secondary" value="Add Account">
+    </form>
+
+    <table class="table table-dark mt-2">
+        <thead>
+            <th scope="col">Website</th>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th>
+                <div class="search-box">
+                    <input type="text" name="search" id="search" class="form-control py-1" placeholder='Search Website (e.g "hydpass.com")'>
+                </div>
+            </th>
+        </thead>
+        <tbody class="table-body">
+            {% for index, account in enumerate(accounts) %}
+                <tr id="row-{{ index }}">
+                    <th scope="col" class="py-4 website">{{ account["website"] }}</th>
+                    <th scope="col" class="py-4 email">{{ account["email"] }}</th>
+                    <th scope="col" class="py-4 username">{{ account["username"] }}</th>
+                    <th scope="col" class="py-4">
+                        <div class="input-group">
+                            <input type="password" class="form-control w-75 mx-auto text-center password" value='{{ fernet.decrypt(account["password"]).decode() }}' id="password-{{ index }}" readonly>
+                            <button class="btn btn-primary toggle-visibility" type="button" id="{{ index }}"><span class="fa fa-eye"></span></button>
+                        </div>
+                    </th>
+                    <th>
+                        <input type="button" class="btn btn-primary mx-1 p-3 edit" value="Edit Account" name="edit" id="{{ index }}">
+                        <input type="button" class="btn btn-warning mx-1 p-2 delete" value="Remove Account" name="delete" id="{{ index }}">
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!--MODAL BOX FOR THE DELETE ACCOUNT MODAL-->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-secondary">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Account</h5>
+
+                    <button type="btn" class="close" data-bs-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <h3>Are you sure you want to delete the account?</h3>
+                    <button type="button" class="btn btn-primary w-75 mr-5 mt-5" data-bs-dismiss="modal">No</button>
+                    <h3 class="text-warning mt-5">Master Password Confirmation</h3>
+                    <input type="password" class="form-control text-center" id="delete-password-confirmation" placeholder="Enter password to confirm.">
+                    <button type="button" class="btn btn-secondary w-25 ml-5 mt-5" id="delete-account">Yes</button>
+                </div>
+
+                <div class="modal-footer">
+                    <p class="text-warning">This change is IRREVERSIBLE! (but you can always add it back)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL BOX FOR CONFIRMATION OF VISIBILITY OF ACCOUNT-->
+    <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-secondary">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Visibility</h5>
+
+                    <button type="btn" class="close" data-bs-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <h3>Enter master password to make password visible</h3>
+                    <input type="password" class="form-control mt-5 text-center" id="confirm-password-confirmation" placeholder="Enter password to confirm.">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-25" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary w-25" id="confirm-modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--MODAL BOX FOR THE EDIT ACCOUNT MODAL-->
+    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-secondary">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Edit Account</h5>
+
+                    <button type="btn" class="close" data-bs-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-1">
+                        <label for="username" class="form-label">Website</label>
+                        <input type="text" id="edit-website" class="form-control text-center" >
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="username" class="form-label">Email</label>
+                        <input type="text" id="edit-email" class="form-control text-center" >
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="edit-username" class="form-control text-center" >
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="username" class="form-label">Password</label>
+                        <input type="password" id="edit-password" class="form-control text-center" >
+                    </div>
+                    <div class="mb-3 mt-5">
+                        <label for="username" class="form-label text-warning">Master Password</label>
+                        <input type="password" id="edit-master-password" class="form-control text-center" placeholder="Enter master password to confirm edit." required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-25" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary w-25" id="edit-done">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="static/manager.js"></script>
+{% endblock %}
+

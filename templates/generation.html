@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+
+{% block body %}
+    <h1 class="mt-5 mb-2" style="font-size: 75px">Password Generation</h1>
+    <p class="mt-0">Generates a password for you</p>
+    <form action="/generation" method="post" class="mt-3 text-danger" id="form">
+        <div>
+            <label for="passLength">Password Length</label>
+            <input class="form-control" type="number" id="passLength" name="passLength" class="form-range" min="4" max="94" value={{ length }}>
+        </div>
+
+        <div class="mt-5 mx-3" style="display: inline-block;">
+            <p>Lowercase</p>
+            <input type="checkbox" class="form-check-input mt-0 p-3" name="lowercase" {{ lowercase }}>
+        </div>
+        <div class="mt-5 mx-3" style="display: inline-block;">
+            <p>Uppercase</p>
+            <input type="checkbox" class="form-check-input mt-0 p-3" name="uppercase" {{ uppercase }}>
+        </div>
+        <div class="mt-5 mx-3" style="display: inline-block;">
+            <p>Numbers</p>
+            <input type="checkbox" class="form-check-input mt-0 p-3" name="numbers" {{ numbers }}>
+        </div>
+        <div class="mt-5 mx-3" style="display: inline-block;">
+            <p>Symbols</p>
+            <input type="checkbox" class="form-check-input mt-0 p-3" name="symbols" {{ symbols }}>
+        </div>
+
+        <br />
+        <input type="submit" value="Generate" class="mt-5 mb-5 button-set">
+    </form>
+
+    {% if success %}
+        <div class="input-group mt-2 w-25">
+            <input type="text" class="form-control" placeholder="{{ password1 }}" id="pass-1" disabled>
+            <button onclick="copyText1()"class="btn btn-secondary" type="button" id="copy-1"><i id="icon" class="fa fa-copy"></i></button>
+        </div>
+    {% endif %}
+    <script src="static/generation.js"></script>
+{% endblock %}
+
